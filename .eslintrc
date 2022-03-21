@@ -1,0 +1,17 @@
+{
+  "extends": ["next", "next/core-web-vitals"],
+  "rules": {
+    // enable additional rules
+    "indent": ["error", 4],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "double"],
+    "semi": ["error", "always"],
+
+    // override default options for rules from base configurations
+    "no-cond-assign": ["error", "always"],
+
+    // disable rules from base configurations
+    "no-console": "off",
+    "no-unused-vars": "warn"
+  }
+}
