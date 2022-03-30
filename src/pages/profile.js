@@ -58,7 +58,7 @@ function Profile() {
     );
 }
 
-Profile.getInitialProps = async ({ req }) => {
+export const getServerSideProps = async ({ req }) => {
     const cookies = parseCookies(req);
     if (cookies.user) {
         return {

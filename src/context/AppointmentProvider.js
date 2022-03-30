@@ -1,10 +1,10 @@
 import Cookies from "js-cookie";
 import DocApi from "../utils/api";
 import { useRouter } from "next/router";
-import { sub, add, format } from "date-fns";
+import { sub, add } from "date-fns";
 import { formatDateForAPI } from "../utils/commonUtils";
 import { createContext, useContext, useReducer } from "react";
-import { appointmentSteps, appointmentLocations, API_DATE_FORMAT } from "../constants";
+import { appointmentSteps, appointmentLocations } from "../constants";
 import { useAppStateContext } from "./AppStateProvider";
 const { ONLINE } = appointmentLocations;
 const initState = {
@@ -93,7 +93,7 @@ const AppointmentProvider = ({ children }) => {
         resetData: () => dispatch({ type: "RESET_DATA" }),
         setData: payload => dispatch({ type: "SET_DATA", payload }),
         proceedTo: payload => dispatch({ type: "PROCEED_TO", payload }),
-        fetchAppointments: async () => {
+        fetchAppointments: async (payload) => {
             handleCookieRedirection();
             try {
                 const endDate = formatDateForAPI(add(new Date(), { days: 30 }));
@@ -103,8 +103,8 @@ const AppointmentProvider = ({ children }) => {
                     body: JSON.stringify({
                         taskName: "UPCOMING_APPOINTMENTS",
                         accesstoken: Cookies.get("accessToken"),
-                        startDate,
-                        endDate,
+                        startDate: payload.startDate || startDate,
+                        endDate: payload.endDate || endDate,
                         docId: envConsts.DOC_ID
                     })
                 };

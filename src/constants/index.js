@@ -114,6 +114,6 @@ export const envConsts = {
         DOC_ID: "ganesh.umesh007@gmail.com"
     },
     production: {
-        DOC_ID: "92b97397-3eac-42a7-9fea-aa0ccb21cb3c"
+        DOC_ID: "ganesh.umesh007@gmail.com" //"92b97397-3eac-42a7-9fea-aa0ccb21cb3c"
     }
 };

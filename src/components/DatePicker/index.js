@@ -1,7 +1,11 @@
-import DatePicker from "react-datepicker";
+import DatePicker, { setDefaultLocale, registerLocale, getDefaultLocale } from "react-datepicker";
 import { forwardRef, useState } from "react";
 import { IoMdCalendar } from "react-icons/io";
+import enIn from 'date-fns/locale/en-IN';
 import "react-datepicker/dist/react-datepicker.css";
+
+registerLocale('enIn', enIn);
+setDefaultLocale('enIn');
 
 const CustomInput = ({ value, onClick, onChange }, ref) => (
     <div className="flex items-center bg-background5 rounded-md max-w-max" onClick={onClick}>

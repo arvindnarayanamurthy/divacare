@@ -64,6 +64,4 @@ export const safeJsonParse = (str) => {
     }
 };
 
-export const formatDate = (date, format) => format(date, format);
-
 export const formatDateForAPI = (date) => `${format(date, API_DATE_FORMAT)}[Asia/Calcutta]`;

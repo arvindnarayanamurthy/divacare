@@ -209,8 +209,8 @@ const Auth = ({ isLoginPage = false }) => {
                 handleClick("login");
             });
         } else {
-            doLogin(payload, () => {
-                isLoginPage && router.replace("/");
+            doLogin(payload, (isDoctor) => {
+                isLoginPage && router.replace(isDoctor ? "/doctor/appointments" : "/");
             });
         }
     };

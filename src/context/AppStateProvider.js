@@ -97,8 +97,7 @@ const AppStateProvider = ({ children, appCookies, env }) => {
 
                     const validateUserBody = {
                         taskName: "validateuser",
-                        accesstoken: accessToken,
-                        isDoctor: "false"
+                        accesstoken: accessToken
                     };
                     const validateUserResponse = await DocApi({
                         method: "POST",
@@ -115,10 +114,12 @@ const AppStateProvider = ({ children, appCookies, env }) => {
                     if (validateData && validateData.statusCode === 200 && validateData.body) {
                         const validateResponseBody = JSON.parse(validateData.body);
                         const firstName = validateResponseBody.firstName;
+                        const isDoctor = validateResponseBody.isDoctor === "true";
                         const spaceIndex = firstName.indexOf(" ");
                         const dataObj = {
                             isLoggedIn: true,
                             ...validateResponseBody,
+                            isDoctor,
                             firstName: spaceIndex > 0 ? firstName.substr(0, spaceIndex) : firstName,
                             lastName: spaceIndex > 0 ? firstName.substr(spaceIndex + 1) : "",
                             password: filteredPayload.password
@@ -131,7 +132,7 @@ const AppStateProvider = ({ children, appCookies, env }) => {
                         setCookie("refreshToken", refreshToken);
                         setCookie("idToken", idToken);
                         setCookie("userData", JSON.stringify(dataObj));
-                        successCallback && successCallback();
+                        successCallback && successCallback(validateResponseBody.isDoctor === "true");
                     } else {
                         throw new Error("Login");
                     }

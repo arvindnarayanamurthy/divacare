@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import classNames from "classnames";
 import Link from "next/link";
 import { Dialog, Transition } from "@headlessui/react";
+import { useAppStateContext } from "../context/AppStateProvider";
 import {
     MdMenu,
     MdClose,
@@ -25,8 +26,13 @@ const navigation = {
 
 export default function DoctorLayout(props) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const { appState: { user = {} }, doLogout } = useAppStateContext();
     const router = useRouter();
     const { children } = props;
+    const handleLogout = () => {
+        router.replace("/");
+        doLogout();
+    };
     return (
         <>
             <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -111,18 +117,16 @@ export default function DoctorLayout(props) {
                                 </nav>
                             </div>
                             <div className="flex-shrink-0 flex border-t border-gray-200 p-2">
-                                <Link href="/" passHref>
-                                    <div className="flex-shrink-0 group block">
-                                        <div className="flex items-center group-hover:bg-background10 rounded-md p-2">
-                                            <div>
-                                                <MdLogout className="inline-block h-10 w-10 text-text3 group-hover:text-primary1" />
-                                            </div>
-                                            <div className="ml-3">
-                                                <p className="text-base font-medium text-text3 group-hover:text-primary1">Sign Out</p>
-                                            </div>
+                                <div className="flex-shrink-0 group block" onClick={handleLogout}>
+                                    <div className="flex items-center group-hover:bg-background10 rounded-md p-2">
+                                        <div>
+                                            <MdLogout className="inline-block h-10 w-10 text-text3 group-hover:text-primary1" />
+                                        </div>
+                                        <div className="ml-3">
+                                            <p className="text-base font-medium text-text3 group-hover:text-primary1">Sign Out</p>
                                         </div>
                                     </div>
-                                </Link>
+                                </div>
                             </div>
                         </div>
                     </Transition.Child>
@@ -174,18 +178,16 @@ export default function DoctorLayout(props) {
                         </nav>
                     </div>
                     <div className="flex-shrink-0 flex border-t border-gray-200 p-2">
-                        <Link href="/" passHref>
-                            <div className="flex-shrink-0 w-full group block">
-                                <div className="flex items-center group-hover:bg-background10 rounded-md p-2">
-                                    <div>
-                                        <MdLogout className="inline-block h-9 w-9 text-text3 group-hover:text-primary1" />
-                                    </div>
-                                    <div className="ml-3">
-                                        <p className="text-sm font-medium text-text3 group-hover:text-primary1">Sign Out</p>
-                                    </div>
+                        <div className="flex-shrink-0 w-full group block" onClick={handleLogout}>
+                            <div className="flex items-center group-hover:bg-background10 rounded-md p-2">
+                                <div>
+                                    <MdLogout className="inline-block h-9 w-9 text-text3 group-hover:text-primary1" />
+                                </div>
+                                <div className="ml-3">
+                                    <p className="text-sm font-medium text-text3 group-hover:text-primary1">Sign Out</p>
                                 </div>
                             </div>
-                        </Link>
+                        </div>
                     </div>
                 </div>
             </div>

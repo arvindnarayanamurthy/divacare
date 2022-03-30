@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useEffect } from "react";
 import styled from "styled-components";
 
 const LandingWithBackground = styled.div`
@@ -33,6 +34,9 @@ const Doctor = styled.div`
 `;
 
 export default function Landing() {
+    useEffect(() => {
+        console.log("====>", new Date().getTimezoneOffset());
+    }, []);
     return (
         <LandingWithBackground>
             <div id="landing" className="relative bg-background1 bg-opacity-1 z-0">
