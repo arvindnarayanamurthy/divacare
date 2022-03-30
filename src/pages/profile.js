@@ -60,7 +60,7 @@ function Profile() {
 
 export const getServerSideProps = async ({ req }) => {
     const cookies = parseCookies(req);
-    if (cookies.user) {
+    if (!cookies.userData) {
         return {
             redirect: {
                 destination: "/auth",

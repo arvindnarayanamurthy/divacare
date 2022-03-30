@@ -93,7 +93,7 @@ const AppointmentProvider = ({ children }) => {
         resetData: () => dispatch({ type: "RESET_DATA" }),
         setData: payload => dispatch({ type: "SET_DATA", payload }),
         proceedTo: payload => dispatch({ type: "PROCEED_TO", payload }),
-        fetchAppointments: async (payload) => {
+        fetchAppointments: async (payload = {}) => {
             handleCookieRedirection();
             try {
                 const endDate = formatDateForAPI(add(new Date(), { days: 30 }));
